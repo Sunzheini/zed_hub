@@ -1,0 +1,18 @@
+pip freeze > requirements.txt
+correct the 4 vars and STATIC_ROOT in settings.py
+install EnvFile plugin in PyCharm
+create a .env file in the root of the project and fill in the vars
+
+create a Dockerfile in the root of the project and fill it in acc. to prez
+package application in docker image
+push docker image into docker hub
+pull docker image inside the server
+start application starting the new image on the server
+
+
+
+
+
+
+
+

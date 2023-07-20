@@ -1,14 +1,43 @@
+import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-)_ta$7ganopu7tn=f7m=$hg_!(t0!@!kc%a(8t+xu_cud2ujt_'
+# change these three for AWS -------------------
 
-DEBUG = True
+# SECRET_KEY = 'django-insecure-)_ta$7ganopu7tn=f7m=$hg_!(t0!@!kc%a(8t+xu_cud2ujt_'
+#
+# DEBUG = True
+#
+# ALLOWED_HOSTS = []
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
-ALLOWED_HOSTS = []
+SECRET_KEY = os.environ.get('SECRET_KEY', None)
+
+DEBUG = bool(int(os.environ.get('DEBUG')))
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(' ')
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', None),
+        'USER': os.getenv('DB_USER', None),
+        'PASSWORD': os.getenv('DB_PASSWORD', None),
+        'HOST': os.getenv('DB_HOST', None),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
+}
+
+# -----------------------------------------------
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,13 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zed_hub.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -87,5 +109,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = (
     BASE_DIR / 'static_files',
 )
+
+STATIC_ROOT = os.getenv('STATIC_ROOT')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
