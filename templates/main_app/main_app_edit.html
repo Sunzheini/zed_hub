@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}Edit{% endblock %}
+
+{% block page_name %}
+    <h1 class="page-title">Edit</h1>
+{% endblock %}
+
+{% block main_content %}
+    <p>This is the edit page</p>
+
+    <form action="{% url 'main app edit' pk=current_object.pk slug=current_object.slug %}" method="post">
+        <table class="table-form">
+            {{ form }}
+        </table>
+
+        {% csrf_token %}
+        <button class="form-button">submit</button>
+    </form>
+{% endblock %}

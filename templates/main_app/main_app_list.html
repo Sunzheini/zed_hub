@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}List{% endblock %}
+
+{% block page_name %}
+    <h1 class="page-title">List</h1>
+{% endblock %}
+
+{% block main_content %}
+    <p>This is the list page</p>
+
+    {% for current_object in all_objects %}
+        <p>{{ current_object.name }}</p>
+        <p>{{ current_object.description }}</p>
+
+        <a class="table-link" href="{% url 'main app edit' pk=current_object.pk slug=current_object.slug %}">
+            Edit
+        </a>
+        <br>
+        <a class="table-link" href="{% url 'main app delete' pk=current_object.pk slug=current_object.slug %}">
+            Delete
+        </a>
+    {% endfor %}
+
+{% endblock %}

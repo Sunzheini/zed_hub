@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}Delete{% endblock %}
+
+{% block page_name %}
+    <h1 class="page-title">Delete</h1>
+{% endblock %}
+
+{% block main_content %}
+    <p>This is the delete page</p>
+
+    <form action="{% url 'main app delete' pk=current_object.pk slug=current_object.slug %}" method="post">
+        <table class="table-form">
+            {{ form }}
+        </table>
+
+        {% csrf_token %}
+        <button class="form-button">submit</button>
+    </form>
+{% endblock %}

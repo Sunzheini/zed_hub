@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}Add{% endblock %}
+
+{% block page_name %}
+    <h1 class="page-title">InAdddex</h1>
+{% endblock %}
+
+{% block main_content %}
+    <p>This is the add page</p>
+
+    <form action="{% url 'main app add' %}" method="post">
+        <table class="table-form">
+            {{ form }}
+        </table>
+
+        {% csrf_token %}
+        <button class="form-button">submit</button>
+    </form>
+{% endblock %}

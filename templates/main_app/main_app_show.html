@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+
+{% block page_title %}Show{% endblock %}
+
+{% block page_name %}
+    <h1 class="page-title">Show</h1>
+{% endblock %}
+
+{% block main_content %}
+    <p>This is the show page</p>
+
+	<p>{{ current_object.name }}</p>
+	<p>{{ current_object.description }}</p>
+
+    <a class="table-link" href="{% url 'main app edit' pk=current_object.pk slug=current_object.slug %}">
+    	Edit
+    </a>
+    <a class="table-link" href="{% url 'main app delete' pk=current_object.pk slug=current_object.slug %}">
+    	Delete
+    </a>
+
+{% endblock %}
